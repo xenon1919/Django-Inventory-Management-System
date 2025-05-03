@@ -1,0 +1,122 @@
+{% extends "invApp/layout.html" %}
+
+{% block title %}Delete Product{% endblock %}
+
+{% block content %}
+  <style>
+    /* Custom styles for the delete product page */
+    .delete-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 4rem 2rem;
+      background-color: #f8f9fa;
+      min-height: 400px;
+      flex-wrap: wrap;
+      border-radius: 0.5rem;
+      text-align: left;
+    }
+
+    .delete-container svg {
+      width: 150px;
+      height: 150px;
+      fill: #007bff;
+    }
+
+    .delete-content {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .delete-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #343a40;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Style the form */
+    .delete-content form {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .btn-yes {
+      background-color: #dc3545; /* Danger red */
+      color: #fff;
+      padding: 1rem 2rem;
+      font-size: 1.25rem;
+      border-radius: 0.4rem;
+      border: none;
+      margin-right: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-yes:hover {
+      background-color: #c82333;
+      color: #fff;
+    }
+
+    .btn-cancel {
+      background-color: #6c757d; /* Secondary gray */
+      color: #fff;
+      padding: 1rem 2rem;
+      font-size: 1.25rem;
+      border-radius: 0.4rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-cancel:hover {
+      background-color: #5a6268;
+      color: #fff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .delete-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+      }
+
+      .delete-container svg {
+        width: 100px;
+        height: 100px;
+      }
+
+      .delete-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .btn-yes,
+      .btn-cancel {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+        display: inline-block;
+        margin: 0.5rem;
+      }
+    }
+  </style>
+
+  <div class="delete-container">
+    <!-- Inventory-themed SVG icon (box representing products) -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M20 7h-3V5c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM9 5h6v2H9V5zm11 14H4V9h16v10z"/>
+    </svg>
+
+    <div class="delete-content">
+      <h1>Delete Product?</h1>
+      <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn-yes">Yes</button>
+        <a href="{% url 'product_list' %}" class="btn-cancel">Cancel</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}

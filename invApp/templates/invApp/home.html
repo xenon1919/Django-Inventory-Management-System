@@ -1,0 +1,97 @@
+{% extends "invApp/layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <style>
+    .home-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 4rem 2rem; /* Increased padding for larger feel */
+      background-color: #f8f9fa;
+      min-height: 400px; /* Increased from 350px */
+      flex-wrap: wrap;
+      text-align: left;
+      border-radius: 0.5rem; /* Subtle rounding for modern look */
+    }
+
+    .home-header svg {
+      width: 150px;
+      height: 150px;
+      fill: #007bff;
+    }
+
+    .header-content {
+      max-width: 800px; /* Increased from 700px to match larger container */
+    }
+
+    .header-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #343a40;
+      margin-bottom: 1.5rem;
+    }
+
+    .header-content p.lead {
+      font-size: 1.5rem;
+      color: #6c757d;
+      margin-bottom: 2rem;
+    }
+
+    .btn-custom {
+      background-color: #007bff;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.25rem;
+      border-radius: 0.4rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background-color: #0056b3;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .home-header {
+        flex-direction: column;
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+      }
+
+      .home-header svg {
+        width: 100px;
+        height: 100px;
+      }
+
+      .header-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .header-content p.lead {
+        font-size: 1.25rem;
+      }
+
+      .btn-custom {
+        padding: 0.75rem 1.5rem;
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+
+  <div class="home-header">
+    <!-- Inventory-themed SVG icon (box representing products) -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M20 7h-3V5c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM9 5h6v2H9V5zm11 14H4V9h16v10z"/>
+    </svg>
+
+    <div class="header-content">
+      <h1>Welcome to Inventory Management</h1>
+      <p class="lead">Manage your products efficiently and effectively.</p>
+      <a href="{% url 'product_list' %}" class="btn-custom">View Products</a>
+    </div>
+  </div>
+{% endblock %}

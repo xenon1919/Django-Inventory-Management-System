@@ -1,0 +1,188 @@
+{% extends "invApp/layout.html" %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+  <style>
+    /* Custom styles for the product list page */
+    .list-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 4rem 2rem;
+      background-color: #f8f9fa;
+      min-height: 400px;
+      flex-wrap: wrap;
+      border-radius: 0.5rem;
+      text-align: left;
+    }
+
+    .list-container svg {
+      width: 150px;
+      height: 150px;
+      fill: #007bff;
+    }
+
+    .list-content {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .list-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #343a40;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Custom table styling */
+    .custom-table {
+      background-color: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .custom-table thead {
+      background-color: #343a40;
+      color: #fff;
+    }
+
+    .custom-table th {
+      font-size: 1.25rem;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 2px solid #dee2e6;
+    }
+
+    .custom-table td {
+      font-size: 1.1rem;
+      padding: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #dee2e6;
+    }
+
+    .custom-table tr:nth-child(even) {
+      background-color: #f8f9fa; /* Subtle striping */
+    }
+
+    /* Removed hover effect to avoid "blind white" issue */
+    /* .custom-table tr:hover { background-color: #e9ecef; } */
+
+    /* Button styling */
+    .btn-update {
+      background-color: #ffc107;
+      color: #343a40;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 0.3rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      margin-right: 0.5rem;
+    }
+
+    .btn-update:hover {
+      background-color: #e0a800;
+      color: #343a40;
+    }
+
+    .btn-delete {
+      background-color: #dc3545;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 0.3rem;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-delete:hover {
+      background-color: #c82333;
+      color: #fff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .list-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2.5rem 1.5rem;
+      }
+
+      .list-container svg {
+        width: 100px;
+        height: 100px;
+      }
+
+      .list-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .custom-table {
+        font-size: 0.9rem;
+      }
+
+      .custom-table th,
+      .custom-table td {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+      }
+
+      .btn-update,
+      .btn-delete {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin: 0.25rem;
+      }
+
+      .list-content {
+        overflow-x: auto;
+      }
+    }
+  </style>
+
+  <div class="list-container">
+    <!-- Inventory-themed SVG icon (box representing products) -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M20 7h-3V5c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zM9 5h6v2H9V5zm11 14H4V9h16v10z"/>
+    </svg>
+
+    <div class="list-content">
+      <h1>Products</h1>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>SKU</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Supplier</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <td>{{ product.product_id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.sku }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.supplier }}</td>
+            <td>
+              <a href="{% url 'product_update' product.product_id %}" class="btn-update">Update</a>
+              <a href="{% url 'product_delete' product.product_id %}" class="btn-delete">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
